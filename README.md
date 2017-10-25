@@ -71,7 +71,7 @@ $config = [
         'http', // to use default settings a simple string can be used; HTTP port 80
         'https', // HTTPS port 443
         'cert' // Port 443
-      ],
+      ]
     ],
     'mysecondsite.com' => [
       'checks' => [
@@ -80,14 +80,14 @@ $config = [
         ['type' => 'https', 'port' => 4431, 'expect_httpcode' => 200],     // HTTPS on port 4431; success if return code is 200 (after potential redirects)
         ['type' => 'https', 'port' => 4432, 'ssl_no_verifiy' => 1],     // HTTPS on port 4432; no SSL verification
         ['type' => 'cert',  'port' => 4431, 'days' => 14]     // Check SSL connect on port 4431 and check certificate validity; check will fail if certificate is not valid for more than 14 days (default value)
-      ],
+      ]
     ],
     '192.168.0.123' => [
       'checks' => [
         ['type' => 'ping'],     // String notation 'ping' instead of the array could be used
         ['type' => 'port', 'port' => 22]     // Check connect on TCP port 22
-      ],
-    ],
+      ]
+    ]
   ]
 ];
 ```
