@@ -55,8 +55,7 @@ $
 ## Configuration
 
 Following checks are possible:
-* HTTP
-* HTTPS
+* HTTP, HTTPS (GET, POST)
 * TCP Port
 * SSL Certificate validity
 * PING
@@ -96,3 +95,5 @@ $config = [
 
 * Finish config load from JSON encoded configuration file
 * Make timeouts configurable
+* Add Basic Authentication
+* ... more ideas?
