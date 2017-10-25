@@ -1,6 +1,8 @@
 <?php
+// Include SimpleMon class
 require_once 'SimpleMon.php';
 
+// Define config
 $config = [
   'hosts' => [
     'google.com' => [
@@ -12,17 +14,20 @@ $config = [
   ]
 ];
 
+// Create SimpleMon instance with config
 $mon = new tobo\SimpleMon($config);
 
+// Run monitoring checks
 $out = null;
 $ret = $mon->run($out);
 
 echo $out;
 
-if ($ret) {
+// Set exit code for use on the command line depending on monitoring return
+if ($ret) { // All checks were successful
   exit(0);
-} elseif ($ret === null) {
+} elseif ($ret === null) { // No checks done
   exit(1);
-} else {
+} else { // Some checks failed
   exit(2);
 }
