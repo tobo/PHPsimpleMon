@@ -18,7 +18,6 @@ $config = [
 $mon = new tobo\SimpleMon($config);
 
 // Run monitoring checks
-$out = null;
 $ret = $mon->run($out);
 
 echo $out;

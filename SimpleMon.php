@@ -32,6 +32,7 @@ class SimpleMon {
   
   public function run(&$out = '') {
     if (! isset($this->config['hosts'])) { $out = 'No hosts' . $this->nl; return null; }
+    
     $ret = true;
     ob_start();
     

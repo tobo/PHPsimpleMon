@@ -24,7 +24,6 @@ $config = [
 $mon = new tobo\SimpleMon($config);
 
 // Run monitoring checks
-$out = null;
 $ret = $mon->run($out);
 
 echo $out;
@@ -55,4 +54,45 @@ $
 
 ## Configuration
 
-Coming soon
+Following checks are possible:
+* HTTP
+* HTTPS
+* TCP Port
+* SSL Certificate validity
+* PING
+
+### More complex config example
+
+```php
+$config = [
+  'hosts' => [
+    'mywebsite.com' => [
+      'checks' => [
+        'http', // to use default settings a simple string can be used; HTTP port 80
+        'https', // HTTPS port 443
+        'cert' // Port 443
+      ],
+    ],
+    'mysecondsite.com' => [
+      'checks' => [
+        ['type' => 'http',  'expect_content' => 'hello world'],     // HTTP on port 80; success if resulting HTML content contains "hello world"
+        ['type' => 'http',  'port' => 8080, 'no_redirect' => 1, 'expect_httpcode' => [301, 302]],     // HTTP on port 8080; do not follow redirects; expect HTTP code 301 or 302 (which is a redirect)
+        ['type' => 'https', 'port' => 4431, 'expect_httpcode' => 200],     // HTTPS on port 4431; success if return code is 200 (after potential redirects)
+        ['type' => 'https', 'port' => 4432, 'ssl_no_verifiy' => 1],     // HTTPS on port 4432; no SSL verification
+        ['type' => 'cert',  'port' => 4431, 'days' => 14]     // Check SSL connect on port 4431 and check certificate validity; check will fail if certificate is not valid for more than 14 days (default value)
+      ],
+    ],
+    '192.168.0.123' => [
+      'checks' => [
+        ['type' => 'ping'],     // String notation 'ping' instead of the array could be used
+        ['type' => 'port', 'port' => 22]     // Check connect on TCP port 22
+      ],
+    ],
+  ]
+];
+```
+
+## Open topics
+
+* Finish config load from JSON encoded configuration file
+* Make timeouts configurable
